@@ -7,41 +7,40 @@ public class Automated_check {
 		 * This function is used to check whether or not the sorted array
 		 * is indeed in an ascending order
 		 */
-		int i,j,flag=0;
-		int A[] = {5,4,9,8,4,3,2,7};
-		int n=A.length;	//size of the array
+		boolean result=true;		//result is TRUE means there is no error so far
+		int input[] = {5,4,9,8,4,3,2,7};
+		//if input is NULL itself then the function itself will not sort it
 		/*
 		 * let there be some function call here which returns the sorted array 
-		 * and let that array be B and it be sorted in ascending order
+		 * and let that array be output and it be sorted in ascending order
 		 */
-		int[] B= {2,3,4,5,4,7,8,9};	//sorted array
-		int nB=B.length;
-		//the sizes of the two arrays are equal
-		if(n!=nB)	
-			flag=1;
+		int[] output= {2,3,4,4,5,7,8,9};			//sorted array
+			//1. the sizes of the two arrays should equal
+		if(input.length!=output.length)	
+			result=false;
 		else {
-			//the contents in the two array are the same
-			int flag2=0;
-			for(i=0;i<n;i++) {
-				flag2=0;
-				for(j=0;j<n;j++) {
-					if(A[i]==B[j])
-						flag2=1;
+			//2. the contents in the two array should be same
+			for(int i=0;i<input.length;i++) {
+				boolean occurrence=false;				//to see if each element of input is present in output
+														//currently there is no occurrence for i th element
+				for(int j=0;j<input.length;j++) {
+					if(input[i]==output[j])
+						occurrence=true;				//the occurrence has taken place
 				}
-				if(flag2==0) {
-					flag=1;
+				if(occurrence==false) {					//no occurrence means there is some problem
+					result=false;
 					break;
 				}
 			}
 		}
-		if(flag==0){
-			//the array is in ascending order
-			for(i=0;i<n-1;i++) {
-				if(B[i]>B[i+1])
-					flag=1;
+		if(result==true){
+			//3. the array should be in ascending order
+			for(int i=0;i<input.length-1;i++) {
+				if(output[i]>output[i+1])
+					result=false;
 			}
 		}
-		if(flag==0)
+		if(result==true)
 			System.out.println("The sorting algorithm is fool proof");
 		else
 			System.out.println("There is some error in your sorting algorithm");
